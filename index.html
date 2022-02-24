@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>jQuery Populate District Dropdown Based on State Selected</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        $("select.state").change(function () {
+          var selectedState = $(".state option:selected").val();
+          $.ajax({
+            type: "POST",
+            url: "bmjx3c/process-request.php",
+            data: { state: selectedState }
+          }).done(function (data) {
+            $("#response").html(data);
+          });
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <form>
+      <table>
+        <tr>
+          <td>
+            <label>State:</label>
+            <select class="state">
+              <option>Select</option>
+              <option value="haryana">Haryana</option>
+              <option value="maharashtra">Maharashtra</option>
+              <option value="aasam">Aasam</option>
+              <option value="sikkim">Sikkim</option>
+            </select>
+          </td>
+          <td id="response"></td>
+        </tr>
+      </table>
+    </form>
+  </body>
+</html>
